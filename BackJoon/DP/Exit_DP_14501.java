@@ -61,6 +61,16 @@ public class Exit_DP_14501 {
             value[i] = Integer.parseInt(input[1]);
         }
 
+        for(int i=remainDay-1; i>=0; i--) {
+            //기간 안에 상담이 가능할 경우
+            if(i+period[i] <= remainDay) {
+                // 오늘의 최댓값 dp[i] = 이전 이익 최댓값 vs 상담이 끝나는 날짜의 이익 + 이 상담의 이익
+                dp[i] = Math.max(dp[i+1], dp[i+period[i]]+value[i]);
+            } else {
+                dp[i] = dp[i+1];
+            }
+        }
+
 
 
         System.out.println(dp[0]);
