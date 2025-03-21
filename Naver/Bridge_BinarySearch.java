@@ -25,7 +25,7 @@ stones 	k 	result
 
 package Naver;
 
-public class Bridge_TwoPointer {
+public class Bridge_BinarySearch {
     public int solution(int[] stones, int k) {
         int answer = 1;
         
