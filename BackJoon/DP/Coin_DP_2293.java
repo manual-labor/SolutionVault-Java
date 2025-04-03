@@ -23,26 +23,26 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Coin_DP_2293 {
-    
-    public static void main(String[] args) throws IOException{
+
+    public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         String[] input = reader.readLine().split(" ");
         int coinCount = Integer.parseInt(input[0]);
         int sum = Integer.parseInt(input[1]);
-        
+
         int[] coins = new int[coinCount];
 
-        for(int i=0; i<coinCount; i++) {
+        for (int i = 0; i < coinCount; i++) {
             coins[i] = Integer.parseInt(reader.readLine());
         }
 
-        int[] dp = new int[sum+1];
+        int[] dp = new int[sum + 1];
         dp[0] = 1;
 
-        for(int i=0; i<coinCount; i++) {
-            for(int j=coins[i]; j<=sum; j++) {
-                    dp[j] += dp[j-coins[i]];
+        for (int i = 0; i < coinCount; i++) {
+            for (int j = coins[i]; j <= sum; j++) {
+                dp[j] += dp[j - coins[i]];
             }
         }
 
