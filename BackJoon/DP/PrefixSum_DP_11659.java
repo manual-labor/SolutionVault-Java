@@ -27,12 +27,10 @@ package BackJoon.DP;
 
  */
 
-
-
 import java.util.*;
 import java.io.*;
 
-public class PrefixSum {
+public class PrefixSum_DP_11659 {
 
   public static void main(String[] args) throws IOException {
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -48,14 +46,14 @@ public class PrefixSum {
     String[] line = reader.readLine().split(" ");
     for (int i = 0; i < N; i++) {
       array[i] = Integer.parseInt(line[i]);
-        sumArray[i+1] = array[i] + sumArray[i];
+      sumArray[i + 1] = array[i] + sumArray[i];
     }
 
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < M; i++) {
       String[] resultRange = reader.readLine().split(" ");
-      //2 ~ 4를 구하려면 2에서 4 누적합에 2보다 1 낮은 인덱스를 빼면 됨
-      sb.append((sumArray[Integer.parseInt(resultRange[1])] - sumArray[Integer.parseInt(resultRange[0])-1])+"\n");
+      // 2 ~ 4를 구하려면 2에서 4 누적합에 2보다 1 낮은 인덱스를 빼면 됨
+      sb.append((sumArray[Integer.parseInt(resultRange[1])] - sumArray[Integer.parseInt(resultRange[0]) - 1]) + "\n");
     }
 
     System.out.println(sb);
