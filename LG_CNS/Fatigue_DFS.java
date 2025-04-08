@@ -1,3 +1,5 @@
+package LG_CNS;
+
 /*
 https://school.programmers.co.kr/learn/courses/30/lessons/87946
 문제 설명
@@ -37,7 +39,6 @@ k 	dungeons 	result
 따라서 이 경우 세 던전을 모두 탐험할 수 있으며, 유저가 탐험할 수 있는 최대 던전 수는 3입니다.
  */
 
-package Programmers;
 
 import java.util.Arrays;
 import java.util.HashSet;
