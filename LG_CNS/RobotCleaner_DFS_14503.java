@@ -42,19 +42,73 @@ $(i, j)$에 벽이 있는 것이다. 방의 가장 북쪽, 가장 남쪽, 가장
 
  */
 
+package LG_CNS;
 
-package BackJoon.DFS;
+import java.util.*;
+import java.io.*;
 
-class Point  {
-    int x;
-    int y;
-
-    Point(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-}
 
 public class RobotCleaner_DFS_14503 {
-    
+
+    static final int CLEANED_STATUS = 2;
+    static int[] dx = { 0, 1, 0, -1 };
+    static int[] dy = { -1, 0, 1, 0 };
+    static int[][] board;
+    static int width, height;
+    static int answer = 0;
+
+    static void dfs(int x, int y, int direction) {
+
+        if(board[y][x] == 0) {
+            board[y][x] = CLEANED_STATUS;
+            answer++;
+        }
+
+        for(int i=direction-1; i>=direction-4; i--) {
+            int nextX = x + dx[(i + 4) % 4];
+            int nextY = y + dy[(i + 4) % 4];
+
+            if(nextX >=0 && nextX < width && nextY >= 0 && nextY < height && board[nextY][nextX] != 1) {
+                if(board[nextY][nextX] == 0) {
+                    dfs(nextX, nextY, (i + 4) % 4);
+                    return;
+                }
+            }
+        }
+
+        int nextX = x + dx[(direction + 2) % 4];
+        int nextY = y + dy[(direction + 2) % 4];
+
+        if(nextX >=0 && nextX < width && nextY >= 0 && nextY < height && board[nextY][nextX] != 1) {
+            dfs(nextX, nextY, direction);
+        }
+        return;
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(reader.readLine(), " ");
+
+        height = Integer.parseInt(st.nextToken());
+        width = Integer.parseInt(st.nextToken());
+
+        board = new int[height][width];
+
+        st = new StringTokenizer(reader.readLine());
+        int y = Integer.parseInt(st.nextToken());
+        int x = Integer.parseInt(st.nextToken());
+        int direction = Integer.parseInt(st.nextToken());
+
+        for (int i = 0; i < height; i++) {
+            st = new StringTokenizer(reader.readLine());
+            for (int j = 0; j < width; j++) {
+                board[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+
+        dfs(x, y, direction);
+
+        System.out.println(answer);
+
+    }
 }
