@@ -42,7 +42,7 @@ $(i, j)$에 벽이 있는 것이다. 방의 가장 북쪽, 가장 남쪽, 가장
 
  */
 
-package LG_CNS;
+package BackJoon.DFS;
 
 import java.util.*;
 import java.io.*;

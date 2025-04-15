@@ -16,7 +16,7 @@
 
  */
 
-package LG_CNS;
+package BackJoon.Implementation;
 
 import java.util.*;
 import java.io.*;

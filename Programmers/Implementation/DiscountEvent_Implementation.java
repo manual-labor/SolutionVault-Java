@@ -10,7 +10,7 @@
  */
 
 
-package LG_CNS;
+package Programmers.Implementation;
 
 import java.util.HashMap;
 import java.util.Map;
