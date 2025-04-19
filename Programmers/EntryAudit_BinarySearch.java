@@ -39,6 +39,10 @@ public class EntryAudit_BinarySearch {
 
             long canProcess = 0;
             for (int i = 0; i < times.length; i++) {
+                /*
+                 * 각 심사대 별로 주어진 시간 mid동안 최대 몇명의 사람을 심사할 수 있는지 합산한다.
+                 * (ex. mid = 10, times = {2, 3, 4}인 경우, 10 / 2 + 10 / 3 + 10 / 4로 총 5+3+2= 10명 가능
+                 */
                 canProcess += mid / times[i];
             }
 
