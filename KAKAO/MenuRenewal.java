@@ -55,62 +55,56 @@ package KAKAO;
 
 import java.util.*;
 
-public class MenuRenewal {
-    int[] maximum = new int[11];
+class MenuRenewal {
+    static int[] maximum = new int[11];
+    TreeMap<String, Integer> map;
 
-    private static String dfs(int startIndex, int index, int courseCount; String menu, String combinatatedMenu) {
-        if(index == courseCount) {
-            return combinatatedMenu;
+    private void dfs(int startIndex, int index, int courseCount, String menu, String combinatedMenu) {
+        if (index == courseCount) {
+            int count = map.getOrDefault(combinatedMenu, 0) + 1;
+            map.put(combinatedMenu, count);
+
+            if (count >= 2) {
+                maximum[courseCount] = Math.max(count, maximum[courseCount]);
+            }
         } else {
-            for(int i = startIndex; i < menu.length(); i++) {
-                dfs(startIndex+1, index+1, courseCount, menu, combinatatedMenu+menu.charAt(i));
+
+            for (int i = startIndex; i < menu.length(); i++) {
+                dfs(i + 1, index + 1, courseCount, menu, combinatedMenu + menu.charAt(i));
             }
         }
     }
 
     public String[] solution(String[] orders, int[] courses) {
+        map = new TreeMap<>((o1, o2) -> {
+            if (o1.length() == o2.length()) {
+                return o1.compareTo(o2);
+            }
+            return o1.length() - o2.length();
+        });
 
-
-        for(int i=0; i<orders.length; i++) {
+        for (int i = 0; i < orders.length; i++) {
             char[] charArray = orders[i].toCharArray();
             Arrays.sort(charArray);
             orders[i] = new String(charArray);
         }
 
-        TreeMap<String> map = new TreeMap<>((o1,o2)->{
-            if(o1.length()==o2.length()) {
-                return o1.compareTo(o2);
-            }
-                return o1.length() - o2.length();
-        });
-
-
-        for(int course : courses) {
-            for(String order : orders) {
-                String combinatedMenu = dfs(0, 0, course, order);
-                int count = map.getOrDefault(combinatedMenu, 0)+1;
-                maximum[course] = Math.max(maximum[course], count);
-                map.put(combinatedMenu,map.getOrDefault(combinatedMenu, 0)+1);
+        for (int course : courses) {
+            for (String order : orders) {
+                if (order.length() >= course)
+                    dfs(0, 0, course, order, "");
             }
         }
 
-
-
-       // 정렬 필요
-
-       List<String> answer = new List<String>();
-       for(Entry<String, Integer> entry : map.entrySet()) {
-        if(maximum[entry.getKey().length()] == entry.getValue()) {
-            answer.add(entry.getKey());
+        ArrayList<String> answer = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            if (maximum[entry.getKey().length()] == entry.getValue()) {
+                answer.add(entry.getKey());
+            }
         }
-       }
 
-       Collections.sort(answer);
+        Collections.sort(answer);
 
-        return answer.toArray();
-    }
-
-    public static void main(String[] args) {
-
+        return answer.toArray(new String[0]);
     }
 }
